@@ -1,0 +1,144 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+             x:Class="OceanBattle.Client.Views.RegisterView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+            
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="15"/>
+			<RowDefinition Height="50"/>
+
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="50"/>
+
+			<RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.RowSpan="21"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Background="#0B0B45"
+                CornerRadius="5"/>
+
+        <TextBlock Grid.Column="2"
+                   Grid.Row="2"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   Text="E-Mail Address:"/>
+
+        <TextBox x:Name="EmailTextBox"
+                 Grid.Row="3"
+                 Grid.Column="2"
+                 VerticalAlignment="Center"
+				 Text="{Binding Path=Email, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Row="5"
+                   Grid.Column="2"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   Text="User name:"/>
+
+        <TextBox x:Name="UserNameTextBox"
+                 Grid.Row="6"
+                 Grid.Column="2"
+                 VerticalAlignment="Center"
+				 Text="{Binding Path=UserName, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Row="8"
+                   Grid.Column="2"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Left"
+                   Text="First name:"/>
+
+        <TextBox x:Name="FirstNameTextBox"
+                 Grid.Row="9"
+                 Grid.Column="2"
+                 VerticalAlignment="Center"
+				 Text="{Binding Path=FirstName, Mode=TwoWay}"/>
+
+		<TextBlock Grid.Row="11"
+		           Grid.Column="2"
+		           VerticalAlignment="Bottom"
+		           HorizontalAlignment="Left"
+		           Text="Last name:"/>
+
+		<TextBox x:Name="LastNameTextBox"
+                 Grid.Row="12"
+                 Grid.Column="2"
+                 VerticalAlignment="Center"
+				 Text="{Binding Path=LastName, Mode=TwoWay}"/>
+
+		<TextBlock Grid.Row="14"
+		           Grid.Column="2"
+		           VerticalAlignment="Bottom"
+		           HorizontalAlignment="Left"
+		           Text="Password:"/>
+
+		<TextBox x:Name="PasswordTextBox"
+                 Grid.Row="15"
+                 Grid.Column="2"
+				 PasswordChar="•"
+                 VerticalAlignment="Center"
+			     Text="{Binding Path=Password, Mode=TwoWay}"/>
+
+		<TextBlock Grid.Row="17"
+		           Grid.Column="2"
+		           VerticalAlignment="Bottom"
+		           HorizontalAlignment="Left"
+		           Text="Confirm password:"/>
+
+		<TextBox x:Name="ConfirmPasswordTextBox"
+                 Grid.Row="18"
+                 Grid.Column="2"
+				 PasswordChar="•"
+                 VerticalAlignment="Center"
+			     Text="{Binding Path=ConfirmPassword, Mode=TwoWay}"/>
+
+		<Button x:Name="RegisterButton"
+                Grid.Column="2"
+                Grid.Row="20"
+                HorizontalContentAlignment="Center"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Green"
+                Padding="10"
+                MinWidth="100"
+                Opacity="1"
+                Content="Register"
+				Command="{Binding Register}"/>
+    </Grid>
+</UserControl>
