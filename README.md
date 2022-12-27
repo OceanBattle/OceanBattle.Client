@@ -1,1 +1,1 @@
-# OceanBattle.Client
+# Desktop client for game.
