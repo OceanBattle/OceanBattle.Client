@@ -4,6 +4,6 @@ namespace OceanBattle.Client.Factories
 {
     public interface IRegisterViewModelFactory
     {
-        RegisterViewModel Create(ViewModelBase next);
+        RegisterViewModel Create(ViewModelBase next, ViewModelBase prev);
     }
 }

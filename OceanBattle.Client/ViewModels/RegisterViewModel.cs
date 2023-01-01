@@ -1,5 +1,10 @@
 using Avalonia.Metadata;
+using JetBrains.Annotations;
+using OceanBattle.Client.Core.Abstractions;
+using OceanBattle.DataModel.DTOs;
 using ReactiveUI;
+using System;
+using System.Threading.Tasks;
 
 namespace OceanBattle.Client.ViewModels
 {
@@ -7,6 +12,21 @@ namespace OceanBattle.Client.ViewModels
 	{
         private readonly ViewChanger _viewChanger;
         private readonly ViewModelBase _next;
+        private readonly ViewModelBase _prev;
+        private readonly IUserApiClient _userApiClient;
+
+        public bool IsErrorVisible => !string.IsNullOrEmpty(Error);
+
+        private string? _error;
+        public string? Error
+        {
+            get => _error;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _error, value);
+                this.RaisePropertyChanged(nameof(IsErrorVisible));
+            }
+        }
 
 		private string? _firstName;
 		public string? FirstName
@@ -52,14 +72,42 @@ namespace OceanBattle.Client.ViewModels
 
         public RegisterViewModel(
             ViewChanger viewChanger,
-            ViewModelBase next)
+            ViewModelBase next,
+            ViewModelBase prev,
+            IUserApiClient userApiClient)
         {
             _viewChanger = viewChanger;
             _next = next;
+            _prev = prev;
+            _userApiClient = userApiClient;
         }
 
-        public void Register()
+        public void Return()
         {
+            _viewChanger(_prev);
+        }
+
+        public async Task Register()
+        {
+            try
+            {
+                RegisterRequest request = new RegisterRequest
+                {
+                    UserName = UserName,
+                    Password = Password,
+                    Email = Email,
+                    FirstName = FirstName,
+                    LastName = LastName
+                };
+
+                await _userApiClient.PostRegister(request);
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return;
+            }
+
             _viewChanger(_next);
         }
 

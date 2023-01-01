@@ -1,13 +1,18 @@
+using AspNetCoreInjection.TypedFactories;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.VisualTree;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OceanBattle.Client.Core.Abstractions;
+using OceanBattle.Client.DataStore;
+using OceanBattle.Client.Factories;
 using OceanBattle.Client.ViewModels;
 using OceanBattle.Client.Views;
-using AspNetCoreInjection.TypedFactories;
-using OceanBattle.Client.Factories;
+using OcenBattle.Client.Core.Services;
+using System;
+using System.Net.Http;
 
 namespace OceanBattle.Client
 {
@@ -55,9 +60,24 @@ namespace OceanBattle.Client
                 mainViewModel.Content = viewModel;
             });
 
-            services.AddTransient<GameHubViewModel>();
+            //services.AddTransient<GameHubViewModel>();
             services.AddTransient<InvitesViewModel>();
             services.AddTransient<ActivePlayersViewModel>();
+            
+            services.AddSingleton(new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:49155/api/")
+            });
+
+            services.AddTransient<IAuthApiClient, AuthApiClient>();
+            services.AddTransient<IUserApiClient, UserApiClient>();
+            services.AddTransient<IClientDataStore, ClientDataStore>();
+            services.AddDataProtection();
+            services.AddDbContext<ClientDataStoreContext>(
+                options => options.UseSqlite("FileName=./ClientDataStore.db"));
+
+            services.RegisterTypedFactory<IGameHubViewModelFactory>()
+                .ForConcreteType<GameHubViewModel>();
         }
     }
 }

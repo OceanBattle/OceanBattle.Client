@@ -15,7 +15,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+			<RowDefinition Height="3"/>
+            <RowDefinition Height="27"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="50"/>
             
@@ -46,82 +47,108 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.RowSpan="21"
+		<Border Grid.Row="0"
+		        Grid.Column="1"
+		        Grid.ColumnSpan="3"
+		        CornerRadius="5"
+		        IsVisible="{Binding Path=IsErrorVisible}"
+		        Background="Red">
+			<TextBlock Text="{Binding Path=Error}"
+					   Padding="10"
+					   TextWrapping="Wrap"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+		</Border>
+		
+        <Border Grid.RowSpan="22"
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Background="#0B0B45"
                 CornerRadius="5"/>
 
+		<Button x:Name="CloseButton"
+				Grid.Row="2"
+				Grid.Column="2"
+				HorizontalAlignment="Right"
+				Background="Red"
+				Content="X"
+			    VerticalAlignment="Center"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
+				Width="27"
+				Height="27"
+				Command="{Binding Return}"/>
+		
         <TextBlock Grid.Column="2"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Left"
                    Text="E-Mail Address:"/>
 
         <TextBox x:Name="EmailTextBox"
-                 Grid.Row="3"
+                 Grid.Row="4"
                  Grid.Column="2"
                  VerticalAlignment="Center"
 				 Text="{Binding Path=Email, Mode=TwoWay}"/>
 
-        <TextBlock Grid.Row="5"
+        <TextBlock Grid.Row="6"
                    Grid.Column="2"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Left"
                    Text="User name:"/>
 
         <TextBox x:Name="UserNameTextBox"
-                 Grid.Row="6"
+                 Grid.Row="7"
                  Grid.Column="2"
                  VerticalAlignment="Center"
 				 Text="{Binding Path=UserName, Mode=TwoWay}"/>
 
-        <TextBlock Grid.Row="8"
+        <TextBlock Grid.Row="9"
                    Grid.Column="2"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Left"
                    Text="First name:"/>
 
         <TextBox x:Name="FirstNameTextBox"
-                 Grid.Row="9"
+                 Grid.Row="10"
                  Grid.Column="2"
                  VerticalAlignment="Center"
 				 Text="{Binding Path=FirstName, Mode=TwoWay}"/>
 
-		<TextBlock Grid.Row="11"
+		<TextBlock Grid.Row="12"
 		           Grid.Column="2"
 		           VerticalAlignment="Bottom"
 		           HorizontalAlignment="Left"
 		           Text="Last name:"/>
 
 		<TextBox x:Name="LastNameTextBox"
-                 Grid.Row="12"
+                 Grid.Row="13"
                  Grid.Column="2"
                  VerticalAlignment="Center"
 				 Text="{Binding Path=LastName, Mode=TwoWay}"/>
 
-		<TextBlock Grid.Row="14"
+		<TextBlock Grid.Row="15"
 		           Grid.Column="2"
 		           VerticalAlignment="Bottom"
 		           HorizontalAlignment="Left"
 		           Text="Password:"/>
 
 		<TextBox x:Name="PasswordTextBox"
-                 Grid.Row="15"
+                 Grid.Row="16"
                  Grid.Column="2"
 				 PasswordChar="•"
                  VerticalAlignment="Center"
 			     Text="{Binding Path=Password, Mode=TwoWay}"/>
 
-		<TextBlock Grid.Row="17"
+		<TextBlock Grid.Row="18"
 		           Grid.Column="2"
 		           VerticalAlignment="Bottom"
 		           HorizontalAlignment="Left"
 		           Text="Confirm password:"/>
 
 		<TextBox x:Name="ConfirmPasswordTextBox"
-                 Grid.Row="18"
+                 Grid.Row="19"
                  Grid.Column="2"
 				 PasswordChar="•"
                  VerticalAlignment="Center"
@@ -129,7 +156,7 @@
 
 		<Button x:Name="RegisterButton"
                 Grid.Column="2"
-                Grid.Row="20"
+                Grid.Row="21"
                 HorizontalContentAlignment="Center"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
