@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="clr-namespace:OceanBattle.Client.Views;assembly=OceanBattle.Client"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OceanBattle.Client.Views.DeploymentView">
+
+	<UserControl.Resources>
+		<local:TypeToStringConverter x:Key="TypeToStringConverter"/>
+	</UserControl.Resources>
+		
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<Button Content="Ready"
+				Background="Green"
+				Grid.Row="0"
+				Width="150"
+				VerticalAlignment="Stretch"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
+				HorizontalAlignment="Center"/>
+
+		<ListBox Items="{Binding AvailableVessels}"
+				 SelectedItems="{Binding SelectedVessel}"
+				 Grid.Row="2">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding, Converter={StaticResource TypeToStringConverter}}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</UserControl>

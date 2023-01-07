@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 Width="800"
+			 Height="600"
+			 Background="#0B0B45"
+             x:Class="OceanBattle.Client.Views.EndView">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Button x:Name="CloseButton"
+				Grid.Row="0"
+				HorizontalAlignment="Right"
+				Background="Red"
+				Content="X"
+				VerticalAlignment="Center"
+				VerticalContentAlignment="Center"
+				HorizontalContentAlignment="Center"
+				Width="27"
+				Height="27"
+				Command="{Binding Close}"/>
+		
+		<TextBlock Text="{Binding Result}"
+				   Grid.Row="1"
+				   FontSize="30"/>
+		
+	</Grid>
+	
+</UserControl>

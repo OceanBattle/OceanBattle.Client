@@ -1,0 +1,4 @@
+[submodule "OceanBattle.DataModel"]
+	path = OceanBattle.DataModel
+	url = https://github.com/OceanBattle/OceanBattle.DataModel.git
+	branch = master

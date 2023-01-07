@@ -6,14 +6,30 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="OceanBattle.Client.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="OceanBattle.Client">
+        Title="OceanBattle.Client"
+		TransparencyLevelHint="AcrylicBlur">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Window.Background>
+		<ImageBrush Source="/Assets/MainBackground.png" 
+					Stretch="UniformToFill"/>
+	</Window.Background>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+	<Grid>
+		<ExperimentalAcrylicBorder>
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="None"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.75"/>
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<ContentControl Content="{Binding Content}"/>
+	</Grid>
+	
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 </Window>

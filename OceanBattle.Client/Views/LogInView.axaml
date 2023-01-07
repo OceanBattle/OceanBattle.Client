@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OceanBattle.Client.Views.LogInView">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="30"/>
+			<ColumnDefinition Width="250"/>
+			<ColumnDefinition Width="30"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="15"/>
+			<RowDefinition Height="50"/>
+			
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="15"/>
+			<RowDefinition Height="50"/>
+			
+			<RowDefinition Height="60"/>			
+			<RowDefinition Height="50"/>
+			
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="30"/>
+			
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0"
+				Grid.Column="1"
+				Grid.ColumnSpan="3"
+				CornerRadius="5"
+				IsVisible="{Binding Path=IsErrorVisible}"
+				Background="Red">
+			<TextBlock Text="{Binding Path=Error}"
+					   Padding="10"
+					   TextWrapping="Wrap"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+		</Border>
+		
+		<Border Grid.RowSpan="11"
+				Grid.Row="1"
+				Grid.Column="1"
+				Grid.ColumnSpan="3"
+				Background="#0B0B45" 
+				CornerRadius="5"/>
+		
+		<TextBlock Grid.Column="2" 
+				   Grid.Row="2" 
+				   VerticalAlignment="Bottom"
+				   HorizontalAlignment="Left"
+				   Text="E-Mail Address:"/>
+		
+		<TextBox x:Name="LoginTextBox" 
+				 Grid.Row="3" 
+				 Grid.Column="2"
+				 VerticalAlignment="Center"
+				 Text="{Binding Path=Email, Mode=TwoWay}"/>
+		
+		<TextBlock Grid.Row="5" 
+				   Grid.Column="2"
+				   VerticalAlignment="Bottom"
+				   HorizontalAlignment="Left"
+				   Text="Password:"/>
+		
+		<TextBox x:Name="PasswordTextBox" 
+				 Grid.Row="6" 
+				 Grid.Column="2"
+				 VerticalAlignment="Center"
+				 PasswordChar="•"
+				 Text="{Binding Path=Password, Mode=TwoWay}"/>
+		
+		<CheckBox Grid.Row="7"
+				  Grid.Column="2"
+				  Content="Save log in data?"
+				  IsChecked="{Binding SaveLogInData}"
+				  HorizontalAlignment="Center"/>
+		
+		<Button x:Name="LogInButton" 
+				Grid.Column="2"
+				Grid.Row="8"
+				HorizontalContentAlignment="Center"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				VerticalContentAlignment="Center"
+				Background="Green"
+				Padding="10"
+				MinWidth="100"
+				Opacity="1"
+				Command="{Binding LogIn}"
+				Content="Log In"/>
+		
+		<Button 
+			Grid.Column="2"
+			Grid.Row="10"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Background="Transparent"
+			Command="{Binding Register}"
+			Content="Don't have an account? Register!"/>
+	</Grid>
+</UserControl>
