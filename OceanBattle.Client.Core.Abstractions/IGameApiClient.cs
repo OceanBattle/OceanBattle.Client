@@ -5,7 +5,7 @@ namespace OceanBattle.Client.Core.Abstractions
 {
     public interface IGameApiClient
     {
-        IEnumerable<Level> GetLevels();
-        IEnumerable<UserDto> GetActivePlayers();
+        Task<IEnumerable<Level>?> GetLevels();
+        Task<IEnumerable<UserDto>?> GetActivePlayers();
     }
 }

@@ -7,16 +7,15 @@ using System.Reactive.Linq;
 
 namespace OcenBattle.Client.Core.Services
 {
-    public class AuthApiClient : IAuthApiClient
-    {
-        private readonly HttpClient _httpClient;
+    public class AuthApiClient : ApiClientBase, IAuthApiClient
+    {        
         private readonly IClientDataStore _clientDataStore;
 
         public AuthApiClient(
             HttpClient httpClient,
             IClientDataStore clientDataStore) 
+            : base(httpClient)
         {
-            _httpClient = httpClient;
             _clientDataStore = clientDataStore;
         }
 
@@ -32,8 +31,10 @@ namespace OcenBattle.Client.Core.Services
 
         public async Task<AuthResponse?> PostLogIn(LogInRequest request)
         {
+            ObjectContent<LogInRequest> content = new(request, _jsonFormatter);
+
             var response = 
-                await _httpClient.PostAsJsonAsync($"auth/login", request);
+                await _httpClient.PostAsync($"auth/login", content);
 
             AuthResponse? auth = 
                 await response.Content.ReadFromJsonAsync<AuthResponse>();
@@ -51,8 +52,10 @@ namespace OcenBattle.Client.Core.Services
 
         public async Task<AuthResponse?> PostRefresh(TokenRefreshRequest request)
         {
+            ObjectContent<TokenRefreshRequest> content = new(request, _jsonFormatter);
+
             var response = 
-                await _httpClient.PostAsJsonAsync($"auth/refresh", request);
+                await _httpClient.PostAsync($"auth/refresh", content);
 
             AuthResponse? auth = 
                 await response.Content.ReadFromJsonAsync<AuthResponse>();

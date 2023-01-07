@@ -3,6 +3,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OceanBattle.Client.Views.GameHubView">
-  
+             x:Class="OceanBattle.Client.Views.GameHubView"
+			 Width="800"
+			 Height="600">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="80"/>
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"/>
+			<ColumnDefinition Width="10"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		
+		<Button Content="Create session"
+				Grid.Column="0"
+				Grid.Row="1"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				Background="Green"
+				Command="{Binding Path=CreateSession}"/>
+
+		<TextBlock Text="Invites:"
+				   Grid.Row="0"
+				   Grid.Column="2"/>
+		
+		<ListBox x:Name="Invites"
+				 Items="{Binding Invites}"
+				 Grid.Column="2"
+				 Grid.Row="1"
+				 ScrollViewer.VerticalScrollBarVisibility="Auto"
+				 SelectedItem="{Binding SelectedInvite, Mode=TwoWay}">
+
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding SenderUserName}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<Grid Grid.Row="2"
+			  Grid.Column="2"
+			  IsVisible="{Binding IsInviteSelected}">
+			
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="10"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Column="0"
+					   Grid.Row="0"
+					   Grid.ColumnSpan="3"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Center"
+					   Text="{Binding SelectedInvite.SenderUserName}"/>
+
+			<Button Content="Accept"
+					Background="Green"
+					Grid.Row="1"
+					Grid.Column="0"
+					HorizontalAlignment="Right"
+					Command="{Binding Path=AcceptInvite}"/>
+
+			<Button Content="Decline"
+					Background="Red"
+					Grid.Row="1"
+					Grid.Column="2"
+					HorizontalAlignment="Left"
+					Command="{Binding Path=DeclineInvite}"/>
+
+		</Grid>
+		
+	</Grid>
 </UserControl>

@@ -4,19 +4,32 @@ using System.Net.Http.Json;
 
 namespace OcenBattle.Client.Core.Services
 {
-    public class UserApiClient : IUserApiClient
+    public class UserApiClient : ApiClientBase, IUserApiClient
     {
-        private readonly HttpClient _httpClient;
-
         public UserApiClient(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
+            : base(httpClient)
+        {            
         }
 
-        public async Task<UserDto?> GetUser() 
-            => await _httpClient.GetFromJsonAsync<UserDto>($"user/user");
+        public async Task<UserDto?> GetUser()
+        {
+            HttpResponseMessage response =
+                await _httpClient.GetAsync($"user/user");
 
-        public async Task PostRegister(RegisterRequest registerRequest) 
-            => await _httpClient.PostAsJsonAsync($"user/register", registerRequest);
+            response.EnsureSuccessStatusCode();
+
+            UserDto? user = 
+                await response.Content.ReadAsAsync<UserDto>(_formatters);
+
+            return user;
+        }
+            
+
+        public async Task PostRegister(RegisterRequest registerRequest)
+        {
+            ObjectContent<RegisterRequest> content = new(registerRequest, _jsonFormatter);
+
+            await _httpClient.PostAsync($"user/register", content);
+        }            
     }
 }

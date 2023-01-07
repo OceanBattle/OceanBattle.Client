@@ -4,7 +4,7 @@ using ReactiveUI;
 
 namespace OceanBattle.Client.ViewModels
 {
-	public class InvitesViewModel : ViewModelBase
+	public class EndViewModel : ReactiveObject
 	{
 	}
 }

@@ -1,4 +1,5 @@
-﻿using OceanBattle.Client.Core.Abstractions;
+﻿using Avalonia.Controls.ApplicationLifetimes;
+using OceanBattle.Client.Core.Abstractions;
 using OceanBattle.Client.DataStore;
 using OceanBattle.Client.Factories;
 using OceanBattle.DataModel.DTOs;
@@ -41,7 +42,7 @@ namespace OceanBattle.Client.ViewModels
 
             LoadContent();
         }
-        
+
         private async void LoadContent()
         {
             UserDto? user = null;
