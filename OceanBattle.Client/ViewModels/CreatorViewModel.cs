@@ -19,6 +19,7 @@ namespace OceanBattle.Client.ViewModels
 		private readonly IGameApiClient _gameApi;
 		private readonly ViewModelBase _prev;
 		private readonly ViewChanger _viewChanger;
+		private readonly SetBattlefield _battlefieldSetter;
 
 		private UserDto? _lastInvited;
 		public UserDto? LastInvited
@@ -66,12 +67,14 @@ namespace OceanBattle.Client.ViewModels
 			IGameApiClient gameApi,
 			ViewChanger viewChanger,
 			HubConnection connection,
-			ViewModelBase prev)
+			ViewModelBase prev,
+			SetBattlefield battlefieldSetter)
 		{
 			_gameApi = gameApi;
 			_viewChanger = viewChanger;
 			_prev = prev;
 			_connection = connection;
+			_battlefieldSetter = battlefieldSetter;
 
 			LoadPlayers();
 			LoadLevels();
@@ -125,6 +128,8 @@ namespace OceanBattle.Client.ViewModels
 			{
 				Battlefield = 
 					await _connection.InvokeAsync<BattlefieldDto>("CreateSession", level);
+
+				_battlefieldSetter(Battlefield);
             }
 			catch (Exception ex)
 			{
