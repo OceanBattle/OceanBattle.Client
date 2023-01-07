@@ -40,7 +40,13 @@ namespace OceanBattle.Client.ViewModels
 		public BattlefieldDto? Battlefield
 		{
 			get => _battlfield;
-			set => this.RaiseAndSetIfChanged(ref _battlfield, value);
+			set
+			{
+				this.RaiseAndSetIfChanged(ref _battlfield, value);
+
+				if (GameViewModel is not null)
+					GameViewModel.Battlefield = Battlefield;
+			}
 		}
 
 		private ObservableCollection<Invite>? _invites;
@@ -172,11 +178,8 @@ namespace OceanBattle.Client.ViewModels
 					levelDto.AvailableTypes.ToDictionary(kvp => typesReversed[kvp.Key], kvp => kvp.Value)
 				};
 
-				if (Battlefield is not null)
-				{
-                    GameViewModel = _gameviewModelFactory.Create(Player!, level, Battlefield);
-                    _viewChanger(GameViewModel);
-                }
+                GameViewModel = _gameviewModelFactory.Create(Player!, level);
+                _viewChanger(GameViewModel);
 			});
 
 			_connection.On<BattlefieldDto>(nameof(IGameClient.StartGameAsync), oponentBattlefield =>
