@@ -8,7 +8,6 @@ namespace OceanBattle.Client.Factories
     {
         GameViewModel Create(
             UserDto player, 
-            Level level,
-            BattlefieldDto battlefield);
+            Level level);
     }
 }

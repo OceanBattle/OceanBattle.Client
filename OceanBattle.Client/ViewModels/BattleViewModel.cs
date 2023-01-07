@@ -12,6 +12,13 @@ namespace OceanBattle.Client.ViewModels
 	{
 		private readonly HubConnection _connection;
 
+		private bool _isMyTurn;
+		public bool IsMyTurn
+		{
+			get => _isMyTurn;
+			set => this.RaiseAndSetIfChanged(ref _isMyTurn, value);
+		}
+
 		private ObservableCollection<Weapon>? _weapons;
 		public ObservableCollection<Weapon>? Weapons
 		{
@@ -68,12 +75,14 @@ namespace OceanBattle.Client.ViewModels
 
 		public void GotHit(BattlefieldDto battlefield, int x, int y)
 		{
+			IsMyTurn = true;
 			PlayerBattlefield = battlefield;
 		}
 
 		public async void Hit(int x, int y)
 		{
-			if (SelectedWeapon is null)
+			if (SelectedWeapon is null ||
+				!IsMyTurn)
 				return;
 
 			bool result =
@@ -87,6 +96,8 @@ namespace OceanBattle.Client.ViewModels
 
 			if (battlefield is null)
 				return;
+
+			IsMyTurn = false;
 
 			OponentBattlefield = battlefield;
 		}
