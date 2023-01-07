@@ -6,6 +6,9 @@ namespace OceanBattle.Client.Factories
 {
     public interface IGameViewModelFactory
     {
-        GameViewModel Create(UserDto player, Level level);
+        GameViewModel Create(
+            UserDto player, 
+            Level level,
+            BattlefieldDto battlefield);
     }
 }

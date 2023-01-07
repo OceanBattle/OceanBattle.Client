@@ -24,7 +24,8 @@
 				VerticalAlignment="Stretch"
 				VerticalContentAlignment="Center"
 				HorizontalContentAlignment="Center"
-				HorizontalAlignment="Center"/>
+				HorizontalAlignment="Center"
+				Command="{Binding Path=Ready}"/>
 
 		<ListBox Items="{Binding AvailableVessels}"
 				 SelectedItems="{Binding SelectedVessel}"

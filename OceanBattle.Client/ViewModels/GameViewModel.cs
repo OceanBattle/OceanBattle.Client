@@ -21,10 +21,11 @@ namespace OceanBattle.Client.ViewModels
 		public GameViewModel(
 			IDeploymentViewModelFactory deploymentViewModelFactory,
 			UserDto player,
-			Level level)
+			Level level,
+			BattlefieldDto battlefield)
 		{
 			_deploymentViewModelFactory = deploymentViewModelFactory;
-			Content = _deploymentViewModelFactory.Create(player, level);
+			Content = _deploymentViewModelFactory.Create(player, level, battlefield);
 		}
 	}
 }
